@@ -1,0 +1,79 @@
+warning: test tests/filesys/base/lg-full doesn't count for grading
+warning: test tests/userprog/no-vm/multi-oom doesn't count for grading
+warning: test tests/filesys/base/sm-seq-random doesn't count for grading
+warning: test tests/filesys/base/lg-create doesn't count for grading
+warning: test tests/filesys/base/lg-random doesn't count for grading
+warning: test tests/userprog/halt doesn't count for grading
+warning: test tests/filesys/base/lg-seq-random doesn't count for grading
+warning: test tests/filesys/base/syn-write doesn't count for grading
+warning: test tests/filesys/base/sm-full doesn't count for grading
+warning: test tests/filesys/base/syn-remove doesn't count for grading
+warning: test tests/filesys/base/lg-seq-block doesn't count for grading
+warning: test tests/filesys/base/sm-seq-block doesn't count for grading
+warning: test tests/filesys/base/sm-create doesn't count for grading
+warning: test tests/filesys/base/sm-random doesn't count for grading
+warning: test tests/filesys/base/syn-read doesn't count for grading
+TOTAL TESTING SCORE: 100.0%
+ALL TESTED PASSED -- PERFECT SCORE
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+SUMMARY BY TEST SET
+
+Test Set                                      Pts Max  % Ttl  % Max
+--------------------------------------------- --- --- ------ ------
+tests/userprog/Rubric.functionality           100/100 100.0%/100.0%
+--------------------------------------------- --- --- ------ ------
+Total                                                 100.0%/100.0%
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+SUMMARY OF INDIVIDUAL TESTS
+
+Functionality of system calls (tests/userprog/Rubric.functionality):
+	- Test basic.
+	    53/53 tests/userprog/args-none
+
+	- Test "create" system call.
+	     1/ 1 tests/userprog/create-empty
+	     1/ 1 tests/userprog/create-long
+	     1/ 1 tests/userprog/create-normal
+	     1/ 1 tests/userprog/create-exists
+
+	- Test "open" system call.
+	     1/ 1 tests/userprog/open-missing
+	     1/ 1 tests/userprog/open-normal
+	     1/ 1 tests/userprog/open-twice
+
+	- Test "read" system call.
+	     1/ 1 tests/userprog/read-normal
+	     1/ 1 tests/userprog/read-zero
+
+	- Test "write" system call.
+	     1/ 1 tests/userprog/write-normal
+	     1/ 1 tests/userprog/write-zero
+
+	- Test "close" system call.
+	     1/ 1 tests/userprog/close-normal
+
+	- Test "exec" system call.
+	     3/ 3 tests/userprog/exec-once
+	     3/ 3 tests/userprog/exec-multiple
+
+	- Test "wait" system call.
+	     3/ 3 tests/userprog/wait-simple
+	     3/ 3 tests/userprog/wait-twice
+
+	- Test "exit" system call.
+	     3/ 3 tests/userprog/exit
+
+	- Test argument passing on Pintos command line.
+	     5/ 5 tests/userprog/args-single
+	     5/ 5 tests/userprog/args-multiple
+	     5/ 5 tests/userprog/args-many
+	     5/ 5 tests/userprog/args-dbl-space
+
+	- Section summary.
+	     22/ 22 tests passed
+	    100/100 points subtotal
+

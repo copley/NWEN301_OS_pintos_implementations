@@ -1,0 +1,25 @@
+Press F12 for boot menu.
+
+Booting from Hard Disk...
+PiLo hda1
+Loading.........
+Kernel command line: -f -q extract run 'echo kandice'
+Pintos booting with 4,096 kB RAM...
+383 pages available in kernel pool.
+383 pages available in user pool.
+Calibrating timer...  204,600 loops/s.
+hda: 1,008 sectors (504 kB), model "BXHD00011", serial "Generic 1234"
+hda1: 147 sectors (73 kB), Pintos OS kernel (20)
+hda2: 4 sectors (2 kB), Pintos scratch (22)
+hdb: 5,040 sectors (2 MB), model "BXHD00012", serial "Generic 1234"
+hdb1: 4,096 sectors (2 MB), Pintos file system (21)
+filesys: using hdb1
+scratch: using hda2
+Formatting file system...done.
+Boot complete.
+Extracting ustar archive from scratch device into file system...
+Putting 'echo' into the file system...
+Erasing ustar archive...
+Executing 'echo kandice':
+load: echo: error loading executable
+ß
