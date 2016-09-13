@@ -1,0 +1,99 @@
+2.1 Support the execution of simple user programs (Ind. grade C)
+In “userprog/process.c”, you can find several functions that are only partially implemented. They
+are
+tid_t process_execute (const char *file_name);
+static void start_process (void *exec_);
+static void release_child (struct wait_status *cs);
+int process_wait (tid_t child_tid);
+void process_exit (void);
+You are requested to complete the implementation of the above five functions so that a simple
+user program can be loaded and executed properly. A user program is considered simple if it
+does not make any system calls and requires no command-line arguments. Please pay attention to
+the use of “struct exec_info” (defined in “userprog/process.c”) while implementing these
+functions.
+6
+The test cases you will need to successfully run for this part of the project are:
+tests/userprog/args-none
+2.2 Support system call (Ind. grade B)
+In practice, many user programs will require services from Pintos by making system calls. To
+support this requirement, you need to improve the current system call implementation in
+“userprog/syscall.c”. The default behavior of making a system call is to terminate a process. You
+are asked to eliminate this default behavior and implement the right behavior for each system
+call function. The set of system call functions to be re-implemented are listed and briefly
+described below.
+• The exit system call: Terminates the current user program, returning exit value to the
+kernel. As a convention, a value of 0 indicates success. Nonzero values indicate errors.
+• The exec system call: Starts the execution of a user program and returns a valid PID of
+the child process if successful. The parent process cannot return from the exec system
+call until it knows whether the child process has successfully loaded its executable.
+• The wait system call: Waits for a child process and retrieves the child's exit value.
+• The create system call: Creates a new file and returns true if successful and false
+otherwise.
+• The remove system call: Deletes a file and returns true if successful and false otherwise.
+• The open system call: opens a file and returns the corresponding file descriptor (i.e. an
+integer handle). File descriptor 0 is reserved for standard input and file descriptor 1 is
+reserved for standard output.
+• The filesize system call: Returns the size, in bytes, of a file.
+• The read system call: This system call is partially implemented. Complete the
+implementation to read a number of bytes from an open file into a buffer in the user
+program. This system call should return the number of bytes actually read, or -1 if the file
+could not be read.
+• The write system call: This system call is partially implemented. Complete the
+implementation to write a number of bytes to an open file from a buffer in the user
+program. This system call should return the number of bytes actually written.
+• The seek system call: Changes the next byte to be read or written in an open file to a
+certain position.
+• The tell system call: Returns the position of the next byte to be read or written in an open
+file.
+• The close system call: Closes a file.
+7
+To correctly work out this part of the project, you need to be aware of the following
+• In order to implement system calls properly, you must follow the right approach to access
+the user virtual address space (see 1.4).
+• Your system call implementation must treat the file system code as a critical section. At
+any time, only one process is allowed to access the file system. Don’t forget that
+process_execute() also accesses files.
+• You should NEVER modify the code in the “filesys” directory.
+The test cases you will need to successfully run for this part of the project are:
+Test “create” system call:
+tests/userprog/create-empty
+tests/userprog/create-long
+tests/userprog/create-normal
+tests/userprog/create-exists
+Test “open” system call:
+tests/userprog/open-missing
+tests/userprog/open-normal
+tests/userprog/open-twice
+Test “read” system call:
+tests/userprog/read-normal
+tests/userprog/read-zero
+Test “write” system call:
+tests/userprog/write-normal
+tests/userprog/write-zero
+Test “close” system call:
+tests/userprog/close-normal
+Test “exec” system call:
+tests/userprog/exec-once
+tests/userprog/exec-multiple
+Test “wait” system call:
+tests/userprog/wait-simple
+tests/userprog/wait-twice
+8
+Test “exit” system call:
+tests/userprog/exit
+2.3 Support command-line argument (Ind. grade A)
+As we explained in 1.6, every user program with command line arguments will page fault
+immediately until argument passing is implemented. To avoid this from happening, the following
+is used to adjust “*esp” in setup_stack(), which is a function defined in “userprog/process.c”.
+*esp = PHYS_BASE – 12;
+This will work for any test program that does not examine its arguments. Now you need to
+complete the implementation of argument passing so a user program can access its commandline
+arguments correctly. The function below has to be modified or completely re-implemented.
+static bool setup_stack (const char *cmd_line, void **esp);
+To implement the above function and therefore to properly setup the stack before executing a
+user program (see 1.6), you may want to define other facilitating functions.
+The test cases you will need to successfully run for this part of the project are:
+tests/userprog/args-single
+tests/userprog/args-multiple
+tests/userprog/args-many
+tests/userprog/args-dbl-space
