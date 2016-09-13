@@ -1,0 +1,61 @@
+A Priority Ready Queue (Ind. grade C)
+Thread priorities range from PRI_MIN (0) to PRI_MAX (63). Lower numbers correspond to
+lower priorities, so that priority 0 is the lowest priority and priority 63 is the highest. The initial
+thread priority is passed as an argument to thread_create(). If there's no reason to choose
+another priority, use PRI_DEFAULT (31). The PRI_ macros are defined in threads/thread.h,
+and you should not change their values.
+1. When a thread is added to the ready list that has a higher priority than the currently
+running thread, the current thread must​immediately yield the processor to the new
+thread.
+2. You need​to implement the functions (thread_get_priority and thread_set_priority)
+that allow a thread to examine and modify its own priority. Skeletons for these
+functions are provided in threads/thread.c.
+3. When you raise or lower a threads priority via thread_set_priority, you may need to
+reorder the ready queue, and take appropriate action if a higher priority thread is now
+waiting.
+4. You need not​provide any interface to allow a thread to directly modify other threads'
+priorities.
+The test cases you will need to successfully run for this part of the project are:
+1. alarm­priority
+2. priority­fifo
+3. priority­preempt
+4. priority­change
+Priority and synchronisation (Ind. grade B)
+When threads are waiting for a lock, semaphore, or condition variable, the highest priority
+waiting thread should be awakened first.
+1. You must​implement priority waiting for locks, semaphores, and condition variables.
+2. You need not​worry greatly over the efficiency of your queue.
+The test cases you will need to successfully run for this part of the project are:
+1. priority­sema
+2. priority­condvar
+As locks use semaphores, the first test will also test locks.
+Priority Donation (Ind. grade A)
+One issue with priority scheduling is "priority inversion". Consider high, medium, and low
+priority threads H, M, and L, respectively. If H needs to wait for L (for instance, for a lock held
+by L), and M is on the ready list, then H will not get the CPU because the low priority thread
+L will not get chosen over M. A partial fix for this problem is for H to "donate" its priority to L
+while L is holding the lock, then recall the donation once L releases (and thus H acquires)
+the lock.
+Implement priority donation. You will need to account for all different situations in which
+priority donation is required. Be sure to handle multiple donations, in which multiple priorities
+are donated to a single thread. You must also handle nested donation: if H is waiting on a
+lock that M holds and M is waiting on a lock that L holds, then both M and L should be
+boosted to H's priority.
+1. Pay attention to both the ready and various synch queues.
+2. You may alter any data­structures to implement priority donation.
+3. While there is no testcase below, you should also handle priority donation for
+condition variables.
+Bonus:
+1. There is no reason to limit the depth of nested priority donation.
+2. Be extra careful when you release locks that the priorities are reset properly.
+The test cases you will need to successfully run for this part of the project are:
+1. priority­donate­one
+2. priority­donate­lower
+3. priority­donate­sema
+4. priority­donate­multiple
+5. priority­donate­multiple2
+make sure you checkpoint (save) earlier working versions as you go, in case you
+break it with a later implementation
+Challenge (NOT MARKED​):
+1. priority­donate­nest
+2. priority­donate­chain
